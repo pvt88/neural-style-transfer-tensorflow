@@ -15,6 +15,18 @@ This jupyter notebook contains a TensorFlow implementation of Neural Style Trans
    * **Add Storage:** (Optional) Increase size to 20 GiB
    
 2. Connect to your E2 instance
+
 3. Set up SSL certificates and Jupyter
+
+Firstly, we will need to generate a password for your notebook. So open a python shell and run:
+```python
+from notebook.auth import passwd
+passwd()
+Enter password:
+```
+Once you enter a password, it should display a hash of your password.
+```python
+sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
 
 to be continued ...
