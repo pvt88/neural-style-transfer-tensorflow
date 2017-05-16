@@ -18,15 +18,16 @@ This jupyter notebook contains a TensorFlow implementation of Neural Style Trans
 
 3. Set up SSL certificates and Jupyter
 
-Firstly, we will need to generate a password for your notebook. So open a python shell and run:
+Firstly, we will need to generate a password for your notebook. Open a python shell and run:
 ```python
 from notebook.auth import passwd
 passwd()
 Enter password:
+Verify password:
 ```
 Once you enter a password, it should display a hash of your password.
 ```python
-sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Out[2]: 'sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ```
 
 to be continued ...
