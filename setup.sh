@@ -22,3 +22,33 @@ sudo apt-get clean
 
 # install tensorflow
 pip install — upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.10.0rc0-cp27-none-linux_x86_64.whl
+
+
+#Create SSL certificate
+SSL_CERTIFICATE_DIR="/home/ubuntu/ssl"
+
+if [ ! -d "$SSL_CERTIFICATE_DIR" ]; then
+    mkdir $SSL_CERTIFICATE_DIR
+    sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout "$SSL_CERTIFICATE_DIR/mykey.key" -out "$SSL_CERTIFICATE_DIR/mycert.pem" -batch
+    chown -R ubuntu $SSL_CERTIFICATE_DIR
+fi
+
+#Configure jupyter notebook
+JUPYTER_NOTEBOOK_DIR="/home/ubuntu/.jupyter"
+
+if [ ! -f "$JUPYTER_NOTEBOOK_DIR/jupyter_notebook_config.py" ]; then
+    jupyter notebook --generate-config
+
+    # append notebook server settings
+    cat <<EOF >> "$JUPYTER_NOTEBOOK_DIR/jupyter_notebook_config.py"
+c = get_config()
+c.NotebookApp.ip = '*'
+c.NotebookApp.port = 8888
+c.NotebookApp.certfile = u'$SSL_CERTIFICATE_DIR/mycert.pem'
+c.NotebookApp.keyfile = u'$SSL_CERTIFICATE_DIR/mykey.key'
+c.NotebookApp.open_browser = False
+c.NotebookApp.password = u'sha1:<your hashed password>'
+EOF
+    chown -R ubuntu $JUPYTER_NOTEBOOK_DIR
+fi
+
