@@ -25,16 +25,14 @@ git clone https://github.com/pvt88/neural-creative-transfer-tensorflow.git
 
 Firstly, we will need to generate a password for your notebook. Open a python shell and run:
 ```python
-from notebook.auth import passwd
-passwd()
-Enter password:
-Verify password:
+>>> from notebook.auth import passwd
+>>> passwd()
+Enter password: 
+Verify password: 
+'sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+>>>
 ```
-Once you enter a password, it should display a hash of your password.
-```python
-Out[2]: 'sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-```
-Copy your above password and update the setup.sh script with it: 
+The last line is the hash of your password. Copy your hased password and update the setup.sh script with it: 
 ```python
 c.NotebookApp.keyfile = u'$SSL_CERTIFICATE_DIR/mykey.key'
 c.NotebookApp.open_browser = False
